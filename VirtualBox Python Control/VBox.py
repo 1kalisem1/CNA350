@@ -9,14 +9,12 @@ def clone_vm(vm_os):
 
 
 def get_ip(vm):
-    print("8.8.8.8")
-    pass
+    return "8.8.8.8"
 
 
 def main():
     import sys
     from threading import Thread
-
 
     vm_create_number = int(sys.argv[1])  # Number of VMs to create
     vm_os = sys.argv[2]  # OS for the VM, out of 3 available
