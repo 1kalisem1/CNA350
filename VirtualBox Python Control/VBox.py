@@ -1,7 +1,7 @@
 # Bill Erhard
 # RTC CNT 150
 # Controls VirtualBox using Python
-
+import virtualbox
 
 def clone_vm(vm_os):
     print(vm_os)
@@ -16,6 +16,8 @@ def get_ip(vm):
 def main():
     import sys
     from threading import Thread
+
+
     vm_create_number = int(sys.argv[1])  # Number of VMs to create
     vm_os = sys.argv[2]  # OS for the VM, out of 3 available
 
@@ -26,7 +28,7 @@ def main():
         t.start()
     for t in threads:
         t.join()
-    install_upgrade.sh
+
     for vm in threads:
         print(get_ip(vm))
 
