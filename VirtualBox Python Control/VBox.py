@@ -3,6 +3,7 @@
 # Controls VirtualBox using Python
 import virtualbox
 
+
 def clone_vm(vm_os):
     print(vm_os)
     pass
