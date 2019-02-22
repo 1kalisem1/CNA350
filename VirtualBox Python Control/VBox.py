@@ -22,7 +22,10 @@ def clone_vm(vm_os, i):
     vm.clone_to(clone,library.CloneMode.all_states,[])
     vbox.register_machine(clone)
 
-
+    session = clone.create_session()
+    login = session.console.guest.create_session('bill', 'password')
+    process, stdout, stderr = login.execute('~/install_upgrade.sh')
+    print(stdout)
     print(clone.name)
     print(get_ip(vm))
     # sleep(3) # This checks that threads are async. 3 secs total sleep good, 3*num_threads bad.
