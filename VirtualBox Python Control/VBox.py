@@ -3,16 +3,29 @@
 # Controls VirtualBox using Python
 
 import virtualbox
+from virtualbox.library_base import VBoxError
+from virtualbox import library
 
-def clone_vm(vm_os):
-    #from time import sleep
-    print(vm_os)
-    vm = vm_os
+
+# Along with pyvbox and VBoxAPI docs, the following stuff helped on this.
+# https://github.com/sethmlarson/virtualbox-python/blob/master/virtualbox/library_ext/machine.py
+def clone_vm(vm_os, i):
+    # from time import sleep
     vbox = virtualbox.VirtualBox()
-    for machine in vbox.machines:
-        print(machine.name)
+    try:
+        vm = vbox.find_machine(vm_os)
+    except VBoxError:
+        print("No VM by that name found. Cannot clone.")
+        return
+
+    clone = vbox.create_machine("",vm.name+str(i),[],"","")
+    vm.clone_to(clone,library.CloneMode.all_states,[])
+    vbox.register_machine(clone)
+
+
+    print(clone.name)
     print(get_ip(vm))
-    #sleep(3) # This checks that threads are async. 3 secs total sleep good, 3*num_threads bad.
+    # sleep(3) # This checks that threads are async. 3 secs total sleep good, 3*num_threads bad.
     pass
 
 
@@ -29,12 +42,14 @@ def main():
 
     threads = []
     for i in range(vm_create_number):
-        #t = Thread(target=clone_vm, args=(vm_os,))
-        #threads.append(t)
-        #t.start()
-        clone_vm(vm_os)
-   # for t in threads:
-     #   t.join()
+        # t = Thread(target=clone_vm, args=(vm_os,))
+        # threads.append(t)
+        # t.start()
+        clone_vm(vm_os, i)
+
+
+# for t in threads:
+#   t.join()
 
 
 if __name__ == '__main__':
