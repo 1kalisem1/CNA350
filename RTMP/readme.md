@@ -4,7 +4,9 @@ Specifically, using latest version of Ubuntu Desktop, the OpenSSL version pre-in
 
 For Kubernetes control from a windows host with virtualbox installed, use these three guides to get started:
 https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
 https://kubernetes.io/docs/tasks/tools/install-minikube/
+
 https://kubernetes.io/docs/setup/minikube/
 
 You may want to use my example powershell profile for some useful aliases. Make sure the kubectl/minikube aliases point to the directories where you installed the respective .exe files. (I used ~/Documents/kubectl/ and C:\Program Files (x86)\Kubernetes\Minikube)
